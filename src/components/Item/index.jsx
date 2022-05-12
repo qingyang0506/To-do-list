@@ -7,14 +7,14 @@ export default class Item extends Component {
 
   render() {
 
-    const {name,done} = this.props;
+    const {id,name,done} = this.props;
     return (
       <li style={{backgroundColor:this.state.mouse?'#ddd':'white'}} onMouseOver={this.handleMouse(true)} onMouseLeave={this.handleMouse(false)}>
         <label>
-          <input type="checkbox" defaultChecked={done}/>
+          <input type="checkbox" defaultChecked={done} onChange={this.handleCheck(id)}/>
           <span>{name}</span>
         </label>
-        <button  className="btn btn-danger" style={{ display:this.state.mouse?'block':'none' }}>删除</button>
+        <button  onClick={this.handleDelete(id)} className="btn btn-danger" style={{ display:this.state.mouse?'block':'none' }}>删除</button>
       </li>
     )
   }
@@ -23,6 +23,19 @@ export default class Item extends Component {
      return (event)=>{
          this.setState({mouse:flag})
      }
+  }
+
+  handleCheck = (id)=>{
+    return (event)=>{
+       const {target} = event;
+       this.props.updateTodo(id,target.checked);
+    }
+  }
+
+  handleDelete = (id)=>{
+    return ()=>{
+        this.props.deleteTodo(id);
+    }
       
   }
 

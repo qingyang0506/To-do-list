@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { nanoid } from 'nanoid'
+import PropTypes from 'prop-types'
 import './index.css'
 
 export default class Header extends Component {
@@ -21,5 +22,9 @@ export default class Header extends Component {
             this.props.addTodo(todoObj);
             event.target.value = '';
         }
+    }
+
+    static propTypes = {
+       addTodo:PropTypes.func.isRequired
     }
 }
